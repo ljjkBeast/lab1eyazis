@@ -44,12 +44,14 @@ pos_tags_definitions = {"CC"	:   "Coordinating conjunction",
                         "WP$"	:   "Possessive wh-pronoun",
                         "WRB"	:   "Wh-adverb"}
 
+
 @dataclass(eq=True, order=True, unsafe_hash=True)
 class Lexeme:
     lemma: str
     part_of_speech: str
     endings: str
-	
+
+
 def get_words_from_text(text):
     words = []
     for sentence in nltk.sent_tokenize(text):
@@ -105,7 +107,8 @@ def generate_endings_for_words_with_pos_tag(words_with_pos_tag):
         else:
             endings.append("")
     return endings
-	
+
+
 def create_vocabulary_from_text(text):
     words = get_words_from_text(text)
     words_with_pos_tag = pos_tag(words)
@@ -116,7 +119,8 @@ def create_vocabulary_from_text(text):
         lexeme = Lexeme(lemmas_with_pos_tag[i][0].lower(), pos_tags_definitions[lemmas_with_pos_tag[i][1]].lower(), endings[i])
         vocabulary.append(lexeme)
     return vocabulary
-	
+
+
 def create_forms(lexeme):
     if lexeme.lemma == "be":
         return lexeme.lemma
